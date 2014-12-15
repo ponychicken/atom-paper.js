@@ -1,18 +1,17 @@
 {
-  "name": "paperjs",
+  "name": "Paper.js",
   "main": "./lib/paperjs",
-  "version": "0.0.0",
-  "description": "A short description of your package",
+  "version": "0.1.0",
+  "description": "an atom package to provide a paper.js repl in your editor ",
   "activationCommands": {
     "atom-workspace": "paperjs:toggle"
   },
-  "repository": "https://github.com/atom/paperjs",
+  "repository": "https://github.com/ponychicken/atom-paper.js",
   "license": "MIT",
   "engines": {
     "atom": ">0.50.0"
   },
   "dependencies": {
-    "loophole": "^1.0.0",
-    "underscore-plus": "^1.6.2"
+    "loophole": "^1.0.0"
   }
 }

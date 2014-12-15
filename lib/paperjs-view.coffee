@@ -1,7 +1,7 @@
 path = require 'path'
 fs = require 'fs'
 {$, $$$, ScrollView} = require 'atom'
-_ = require 'underscore-plus'
+
 {allowUnsafeEval, allowUnsafeNewFunction} = require 'loophole'
 
 paperEngine = allowUnsafeNewFunction -> require('../external/paperjs-full.js')
