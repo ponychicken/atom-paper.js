@@ -1,0 +1,21 @@
+'context-menu':
+  'atom-text-editor[data-grammar~=js]': [
+    {
+      'label': 'Toggle Paper.js REPL'
+      'command': 'paperjs:toggle'
+    }
+  ]
+'menu': [
+  {
+    'label': 'Packages'
+    'submenu': [
+      'label': 'Paper.js'
+      'submenu': [
+        {
+          'label': 'Toggle Paper.js REPL'
+          'command': 'paperjs:toggle'
+        }
+      ]
+    ]
+  }
+]
