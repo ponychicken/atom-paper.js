@@ -1,5 +1,5 @@
 {
-  "name": "Paper.js",
+  "name": "atom-paperjs",
   "main": "./lib/paperjs",
   "version": "0.1.0",
   "description": "an atom package to provide a paper.js repl in your editor ",
