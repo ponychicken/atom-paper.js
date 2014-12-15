@@ -39,8 +39,6 @@ module.exports = Paperjs =
     paperjsViewState: @paperjsView.serialize()
 
   toggle: ->
-    console.log 'Paperjs was toggled!'
-
     editor = atom.workspace.getActiveEditor()
     return unless editor?
 
