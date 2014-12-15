@@ -15,7 +15,7 @@ module.exports = Paperjs =
     @subscriptions = new CompositeDisposable
 
     # Register command that toggles this view
-    @subscriptions.add atom.commands.add 'atom-workspace', 'paperjs:toggle': => @toggle()
+    @subscriptions.add atom.commands.add 'atom-workspace', 'Paper.js:toggle': => @toggle()
 
     atom.workspace.registerOpener (uriToOpen) ->
       {protocol, host, pathname} = url.parse(uriToOpen)

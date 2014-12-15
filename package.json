@@ -4,7 +4,7 @@
   "version": "0.1.0",
   "description": "an atom package to provide a paper.js repl in your editor ",
   "activationCommands": {
-    "atom-workspace": "paperjs:toggle"
+    "atom-workspace": "Paper.js:toggle"
   },
   "repository": "https://github.com/ponychicken/atom-paper.js",
   "license": "MIT",
