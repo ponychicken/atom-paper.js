@@ -1,7 +1,7 @@
 {
   "name": "atom-paperjs",
   "main": "./lib/paperjs",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "an atom package to provide a paper.js repl in your editor ",
   "activationCommands": {
     "atom-workspace": "Paper.js:toggle"
