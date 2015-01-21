@@ -30,6 +30,20 @@ class PaperjsView extends ScrollView
 
     window.addEventListener 'resize', (e) =>
       @handleResize e
+      
+    @console = {
+      log: =>
+        @print('log', arguments);
+  
+      error: =>
+        @print('error', arguments);
+  
+      warn: =>
+        @print('warn', arguments);
+  
+      clear: =>
+        @consoleContainer.empty();
+    }
 
   serialize: ->
     deserializer: 'PaperjsView'
@@ -90,8 +104,64 @@ class PaperjsView extends ScrollView
 
   renderHTML: ->
     @showLoading()
+    @setupStructure()
     if @editor?
       @renderHTMLCode(@editor.getText())
+
+  setupStructure: ->
+    @empty()
+    @mainContainer = $('<div id="main">')
+    @consoleContainer = $('<div id="console">')
+    
+    @append @mainContainer
+    @append @consoleContainer
+
+  toString: (thing) ->
+    string = ""
+    if (thing instanceof Array)
+      constr = thing.constructor.name
+      props = []
+      
+      for value, index in thing
+        string = index
+        string += ": "
+        string += @toString(value)
+        props.push(string)
+      
+      string = constr + " [" + props.join(", ") + "]"
+            
+    else if (typeof thing == 'object')
+      constr = thing.constructor.name
+      props = []
+      
+      for key, value of thing
+        string = key
+        string += ": "
+        string += @toString(value)
+        props.push(string)
+        
+      string = constr + " {" + props.join(", ") + "}"
+    
+    else if (typeof thing == 'undefined')
+      string = typeof thing
+    else if (thing.toString)
+      string = thing.toString()
+    else
+      string = typeof thing
+      
+    return string
+    
+  # Prints an arbitrary string to the in built console.
+  print: (type, args) ->
+    line = $("<div class='line'>")
+    stringedArgs = []
+    for arg in args
+      stringedArgs.push(@toString(arg))
+
+    line.append(stringedArgs.join(', '))
+    @consoleContainer.append(line)
+    container = @consoleContainer
+    container.scrollTop = container.scrollHeight
 
   renderHTMLCode: (text) ->
     success = false
@@ -100,6 +170,7 @@ class PaperjsView extends ScrollView
     @canvas.height = @height()
     @curPaper = new paperEngine.initialize()
     @curPaper.setup(@canvas)
+    @curPaper.console = @console
 
     try
       allowUnsafeNewFunction => @curPaper.execute(text, '', {});
@@ -109,7 +180,7 @@ class PaperjsView extends ScrollView
       error.innerHTML = 'Error interpreting the Paper.js script: ' + e.message
       error.id = 'error'
 
-    @html $ error || @canvas
+    @mainContainer.html($(error || @canvas))
     @trigger('paperjs:html-changed')
 
   getTitle: ->
